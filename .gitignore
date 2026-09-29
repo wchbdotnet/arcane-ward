@@ -1,0 +1,12 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+*.log
+
+# Local-only RuneLite launchers and preview tooling must never be published.
+local-dev/
+
+# Local concept/reference artwork is not part of the submitted plugin.
+docs/

@@ -1,0 +1,28 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	maven {
+		url = 'https://repo.runelite.net'
+		content { includeGroupByRegex("net\\.runelite.*") }
+	}
+	mavenCentral()
+}
+
+def runeLiteVersion = 'latest.release'
+
+dependencies {
+	compileOnly group: 'net.runelite', name: 'client', version: runeLiteVersion
+	testImplementation 'junit:junit:4.13.2'
+	testImplementation group: 'net.runelite', name: 'client', version: runeLiteVersion
+}
+
+group = 'net.wchbdotnet'
+version = '1.0.0'
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+	options.release.set(11)
+	options.compilerArgs.add('-Xlint:deprecation')
+}
