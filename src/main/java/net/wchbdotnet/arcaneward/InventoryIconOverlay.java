@@ -14,8 +14,10 @@ final class InventoryIconOverlay extends WidgetItemOverlay
 {
 	private final ArcaneWardConfig config;
 	private final Client client;
-	private BufferedImage replacementImage;
-	private BufferedImage originalWardImage;
+	private BufferedImage fortifiedReplacementImage;
+	private BufferedImage ornamentReplacementImage;
+	private BufferedImage originalFortifiedWardImage;
+	private BufferedImage originalOrnamentWardImage;
 
 	@Inject
 	InventoryIconOverlay(ArcaneWardConfig config, Client client)
@@ -30,13 +32,15 @@ final class InventoryIconOverlay extends WidgetItemOverlay
 	@Override
 	public void renderItemOverlay(Graphics2D graphics, int itemId, WidgetItem itemWidget)
 	{
-		if (itemId != ArcaneWardPlugin.ELIDINIS_WARD_F
+		if (!ArcaneWardPlugin.isSupportedWard(itemId)
 			|| !config.shieldAppearance().usesArcaneModel()
-			|| replacementImage == null)
+			|| replacementImage(itemId) == null)
 		{
 			return;
 		}
 
+		BufferedImage replacementImage = replacementImage(itemId);
+		BufferedImage originalWardImage = originalImage(itemId);
 		Rectangle bounds = itemWidget.getCanvasBounds();
 		eraseUncoveredNativePixels(graphics, bounds, originalWardImage, replacementImage);
 		graphics.drawImage(replacementImage, bounds.x, bounds.y, null);
@@ -95,11 +99,31 @@ final class InventoryIconOverlay extends WidgetItemOverlay
 
 	void setReplacementImage(BufferedImage replacementImage)
 	{
-		this.replacementImage = replacementImage;
+		fortifiedReplacementImage = replacementImage;
+		ornamentReplacementImage = replacementImage;
 	}
 
-	void setNativeImage(BufferedImage originalWardImage)
+	void setReplacementImages(BufferedImage fortifiedImage, BufferedImage ornamentImage)
 	{
-		this.originalWardImage = originalWardImage;
+		fortifiedReplacementImage = fortifiedImage;
+		ornamentReplacementImage = ornamentImage;
+	}
+
+	void setNativeImages(BufferedImage fortifiedImage, BufferedImage ornamentImage)
+	{
+		originalFortifiedWardImage = fortifiedImage;
+		originalOrnamentWardImage = ornamentImage;
+	}
+
+	private BufferedImage replacementImage(int itemId)
+	{
+		return itemId == ArcaneWardPlugin.ELIDINIS_WARD_OR
+			? ornamentReplacementImage : fortifiedReplacementImage;
+	}
+
+	private BufferedImage originalImage(int itemId)
+	{
+		return itemId == ArcaneWardPlugin.ELIDINIS_WARD_OR
+			? originalOrnamentWardImage : originalFortifiedWardImage;
 	}
 }

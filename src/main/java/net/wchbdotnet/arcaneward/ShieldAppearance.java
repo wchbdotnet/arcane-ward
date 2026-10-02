@@ -2,7 +2,7 @@ package net.wchbdotnet.arcaneward;
 
 public enum ShieldAppearance
 {
-	ELIDINIS("Elidinis' ward (f)"),
+	ELIDINIS("Original ward"),
 	ARCANE_BASE("Arcane spirit shield"),
 	ARCANE_OR("Arcane spirit shield (or)"),
 	ARCANE_F("Arcane spirit shield (f)");

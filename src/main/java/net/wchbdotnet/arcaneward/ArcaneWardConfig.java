@@ -12,7 +12,7 @@ public interface ArcaneWardConfig extends Config
 	@ConfigItem(
 		keyName = "appearance",
 		name = "Appearance",
-		description = "Choose how Elidinis' ward (f) appears on your client"
+		description = "Choose how Elidinis' ward (f) and (or) appear on your client"
 	)
 	default ShieldAppearance shieldAppearance()
 	{

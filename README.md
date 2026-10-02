@@ -1,11 +1,11 @@
 # Arcane Ward
 
 Arcane Ward is a RuneLite plugin that changes the local appearance of
-Elidinis' ward (f).
+Elidinis' ward (f) and Elidinis' ward (or).
 
 Available appearances:
 
-- Elidinis' ward (f)
+- Original ward
 - Arcane spirit shield
 - Arcane spirit shield (or)
 - Arcane spirit shield (f)
